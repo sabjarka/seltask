@@ -23,11 +23,24 @@ class TwitchHomePage(BasePage):
     BROWSE_BUTTON_ALT2 = (By.XPATH, "//nav//a[contains(@href, 'directory') or contains(@href, 'browse')]")
     # Search icon in bottom nav
     SEARCH_ICON_BOTTOM = (By.CSS_SELECTOR, "svg[aria-label*='Search'], button svg")
+    # Cookie consent banner
+    COOKIE_PROCEED_BUTTON = (By.XPATH, "//button[contains(text(), 'Proceed')]")
 
     def open(self) -> None:
         """Navigate to Twitch home page."""
         self.driver.get(BASE_URL)
+        self.handle_cookie_consent()
         self.wait_for_page_load()
+
+    def handle_cookie_consent(self) -> None:
+        """Handle cookie consent banner if it appears."""
+        try:
+            if self.is_element_visible(self.COOKIE_PROCEED_BUTTON, timeout=3):
+                print("🍪 Handling cookie consent on homepage...")
+                self.click(self.COOKIE_PROCEED_BUTTON)
+                print("✅ Cookie consent accepted")
+        except:
+            pass
 
     def wait_for_page_load(self) -> None:
         """Wait for the home page to load completely."""

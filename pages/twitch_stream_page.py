@@ -12,6 +12,9 @@ class TwitchStreamPage(BasePage):
     MATURE_CONTENT_BUTTON = (By.CSS_SELECTOR, "button[data-a-target='player-overlay-mature-accept']")
     CONSENT_BANNER_ACCEPT = (By.CSS_SELECTOR, "button[data-a-target='consent-banner-accept']")
     CLOSE_MODAL_BUTTON = (By.CSS_SELECTOR, "button[aria-label='Close modal']")
+    # Cookie consent banner
+    COOKIE_PROCEED_BUTTON = (By.XPATH, "//button[contains(text(), 'Proceed')]")
+    COOKIE_BANNER = (By.XPATH, "//*[contains(text(), 'Cookies and Advertising Choices')]")
 
     # Video player locators
     VIDEO_PLAYER = (By.CSS_SELECTOR, "video")
@@ -21,11 +24,21 @@ class TwitchStreamPage(BasePage):
     def handle_modals(self, timeout: int = 10) -> None:
         """
         Handle any modals or popups that may appear on the stream page.
-        This includes mature content warnings, consent banners, etc.
+        This includes cookie consent, mature content warnings, consent banners, etc.
 
         Args:
             timeout: Maximum time to wait for modals
         """
+
+        # Try to handle cookie consent banner first (most common on first visit)
+        try:
+            if self.is_element_visible(self.COOKIE_PROCEED_BUTTON, timeout=3):
+                print("🍪 Handling cookie consent banner...")
+                self.click(self.COOKIE_PROCEED_BUTTON)
+                self.wait_for_invisibility(self.COOKIE_BANNER, timeout=3)
+                print("✅ Cookie consent handled")
+        except:
+            pass
 
         # Try to handle mature content modal
         try:
