@@ -11,8 +11,6 @@ A scalable, maintainable Selenium automation framework using Python 3.12, PyTest
 ✅ **Headless Mode**: Configurable headless execution for CI/CD
 ✅ **Screenshot on Failure**: Automatic screenshot capture when tests fail
 ✅ **Modal Handling**: Built-in support for popups and modals
-✅ **GitHub Actions**: Pre-configured CI/CD pipeline
-✅ **HTML Reports**: Beautiful test execution reports with pytest-html
 
 ## Project Structure
 
@@ -331,25 +329,6 @@ MOBILE_DEVICES = {
     }
 }
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Create a Pull Request
-
-## Future Enhancements
-
-- [ ] Selenium Grid integration for parallel execution
-- [ ] Cross-browser support (Firefox, Safari, Edge)
-- [ ] Data-driven testing with PyTest parametrize
-- [ ] API testing integration
-- [ ] Allure reporting
-- [ ] Docker containerization
-- [ ] Visual regression testing
-- [ ] Performance metrics collection
 
 ## License
 
