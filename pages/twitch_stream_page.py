@@ -67,6 +67,7 @@ class TwitchStreamPage(BasePage):
     def verify_stream_loaded(self) -> None:
         """
         Verify that the stream/video player has loaded successfully.
+        Takes a screenshot after successful verification.
 
         Raises:
             Exception: If video player doesn't load
@@ -81,15 +82,22 @@ class TwitchStreamPage(BasePage):
                 # Check if video is actually playing
                 if self.is_video_playing():
                     print("✅ Video is playing!")
+                    # Take screenshot of successful stream load
+                    screenshot_path = self.take_screenshot("stream_loaded_successfully")
+                    print(f"📸 Screenshot saved: {screenshot_path}")
                     return
                 else:
                     print("⚠️  Video player found but not playing (may need to start manually or be paused)")
                     # Still consider this success - player exists
+                    screenshot_path = self.take_screenshot("stream_loaded_paused")
+                    print(f"📸 Screenshot saved: {screenshot_path}")
                     return
 
             # Fallback: check for player container
             if self.is_element_visible(self.PLAYER_CONTAINER, timeout=5):
                 print("✅ Player container found")
+                screenshot_path = self.take_screenshot("stream_loaded_container")
+                print(f"📸 Screenshot saved: {screenshot_path}")
                 return
 
             # If no player found
