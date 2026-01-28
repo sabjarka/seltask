@@ -2,6 +2,8 @@
 
 A scalable, maintainable Selenium automation framework using Python 3.12, PyTest, and the Page Object Model (POM) design pattern. This framework is built following industry best practices for web automation testing with mobile emulation support.
 
+![Twitch Automation Demo](Recording%202026-01-28%20at%2011.04.57.gif)
+
 ## Features
 
 ✅ **Page Object Model (POM)**: Clean separation of test logic and page elements
@@ -40,6 +42,7 @@ seltask/
 ├── requirements.txt              # Python dependencies
 ├── pytest.ini                    # PyTest configuration
 ├── .gitignore
+├── Recording 2026-01-28 at 11.04.57.gif # Demo recording
 └── README.md
 ```
 
@@ -333,11 +336,3 @@ MOBILE_DEVICES = {
 ## License
 
 This project is open source and available under the MIT License.
-
-## Contact
-
-For questions or support, please open an issue in the repository.
-
----
-
-**Happy Testing!** 🎉🧪
